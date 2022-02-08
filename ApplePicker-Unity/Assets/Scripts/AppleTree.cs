@@ -1,5 +1,5 @@
 /****
- * Created By: Logan Patrick
+ * Created By: Siyu Yang
  * Date Created: 1/31/2022
  * 
  * Last Edited: N/A
@@ -15,15 +15,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : MonoBehaviour
+public class AppleTree : MonoBehaviour
 {
-    public GameObject applePrefab;
+    [Header("Set in Inspector")]
 
-    public float speed = 1f;
+    public GameObject applePrefab;// Prefab for instantiating apples
 
-    public float leftAndRightEdge = 10f;
+    public float speed = 1f;// Speed at which the AppleTree moves
 
-    public float chanceToChanceDirections = 0.1f;
+    public float leftAndRightEdge = 10f;//Distance where AppleTree turns around 
+
+    public float chanceToChanceDirections = 0.1f;//Chance that the AppleTree will be instanianted
 
     public float secondsBetweenAppleDrops = 1f;
 
@@ -33,7 +35,7 @@ public class Tree : MonoBehaviour
     void Start()
     {
         Invoke("DropApple", 2f);
-    }
+    }// end Start
 
     void DropApple()
     {
@@ -59,13 +61,13 @@ public class Tree : MonoBehaviour
             speed = -Mathf.Abs(speed);//Move left
         }
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (Random.value < chanceToChanceDirections)
         {
             speed *= -1;//Change direction
         }
-    }
+    }// end FixedUpdate
 }
 
 
