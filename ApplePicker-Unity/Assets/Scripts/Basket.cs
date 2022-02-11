@@ -2,22 +2,28 @@
  * Created By: Siyu Yang
  * Date Created: 1/31/2022
  * 
- * Last Edited: N/A
- * Last Edited by: N/A
+ * Last Edited: 2/10/2022
+ * Last Edited by: Siyu Yang
  * 
  * Description: Moving the backets with the Mouse
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;//This line enables use of uGUI feature
 
 public class Basket : MonoBehaviour
 {
+    [Header("Set Dynamically")]
+    public Text scoreGT;
     // Start is called before the first frame update
     void Start()
     {
+        GameObject scoreGO = GameObject.Find("ScoreCounter");//Get the Text Component of that GameObject
+        scoreGT = scoreGO.GetComponent<Text>();//Set the starting numberof pounts to 0
+        scoreGT.text = "0";
 
-    }
+    }//end start
 
     // Update is called once per frame
     void Update()
@@ -37,6 +43,13 @@ public class Basket : MonoBehaviour
         if (collideWith.tag == "Apple")
         {
             Destroy(collideWith);
+            int score = int.Parse(scoreGT.text);//Parse the text of the scoreGT into an int
+            score += 100;//Add points for catching the apple
+            scoreGT.text = score.ToString();//Convert the score back to a string and display it
+            if (score > HighScore.score)
+            {
+                HighScore.score = score;//track the high score
+            }
         }
     }
 }
